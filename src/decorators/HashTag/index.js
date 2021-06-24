@@ -22,7 +22,7 @@ class Hashtag {
       );
     };
     HashtagComponent.propTypes = {
-      children: PropTypes.object
+      children: PropTypes.object,
     };
     return HashtagComponent;
   };
@@ -65,10 +65,10 @@ class Hashtag {
 
   getHashtagDecorator = () => ({
     strategy: this.findHashtagEntities,
-    component: this.getHashtagComponent()
+    component: this.getHashtagComponent(),
   });
 }
 
-const getDecorator = config => new Hashtag(config).getHashtagDecorator();
+const getDecorator = (config) => new Hashtag(config).getHashtagDecorator();
 
 export default getDecorator;

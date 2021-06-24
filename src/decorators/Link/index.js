@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { ensureSafeUrl } from '../../utils/url'
-import openlink from '../../../images/openlink.svg';
-import './styles.css';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { ensureSafeUrl } from "../../utils/url";
+import openlink from "../../../images/openlink.svg";
+import "./styles.css";
 
 function findLinkEntities(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    },
-    callback,
-  );
+  contentBlock.findEntityRanges((character) => {
+    const entityKey = character.getEntity();
+    return (
+      entityKey !== null &&
+      contentState.getEntity(entityKey).getType() === "LINK"
+    );
+  }, callback);
 }
 
 function getLinkComponent(config) {
@@ -33,7 +30,7 @@ function getLinkComponent(config) {
     openLink: Function = () => {
       const { entityKey, contentState } = this.props;
       const { url } = contentState.getEntity(entityKey).getData();
-      const linkTab = window.open(ensureSafeUrl(url), 'blank'); // eslint-disable-line no-undef
+      const linkTab = window.open(ensureSafeUrl(url), "blank"); // eslint-disable-line no-undef
       // linkTab can be null when the window failed to open.
       if (linkTab) {
         linkTab.focus();
@@ -57,23 +54,24 @@ function getLinkComponent(config) {
           onMouseEnter={this.toggleShowPopOver}
           onMouseLeave={this.toggleShowPopOver}
         >
-          <a href={ensureSafeUrl(url)} target={targetOption}>{children}</a>
-          {showPopOver && showOpenOptionOnHover ?
+          <a href={ensureSafeUrl(url)} target={targetOption}>
+            {children}
+          </a>
+          {showPopOver && showOpenOptionOnHover ? (
             <img
               src={openlink}
               alt=""
               onClick={this.openLink}
               className="rdw-link-decorator-icon"
             />
-            : undefined
-          }
+          ) : undefined}
         </span>
       );
     }
   };
 }
 
-export default config => ({
+export default (config) => ({
   strategy: findLinkEntities,
   component: getLinkComponent(config),
 });
