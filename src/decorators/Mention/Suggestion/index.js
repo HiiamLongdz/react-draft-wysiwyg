@@ -89,6 +89,7 @@ class Suggestion {
 
 function getSuggestionComponent() {
   const { config } = this;
+
   return class SuggestionComponent extends Component {
     static propTypes = {
       children: PropTypes.array,
@@ -254,10 +255,10 @@ function getSuggestionComponent() {
             >
               {this.filteredSuggestions.map((suggestion, index) => (
                 <div
-                  key={index}
+                  key={suggestion.id}
                   spellCheck={false}
                   onClick={this.addMention}
-                  data-index={index}
+                  data-index={suggestion.id}
                   onMouseEnter={this.onOptionMouseEnter}
                   onMouseLeave={this.onOptionMouseLeave}
                   className={classNames(
@@ -267,9 +268,10 @@ function getSuggestionComponent() {
                   )}
                   style={{ minWidth: 100 }}
                 >
-                  <div>{suggestion.text}</div>
-                  {suggestion.badge && (
-                    <div style={{ marginTop: 10 }}>
+                  <div style={{ marginTop: 10 }}>
+                    <span>{suggestion.text}</span>
+
+                    {suggestion.badge && (
                       <span
                         style={{
                           backgroundColor: suggestion.badge.color,
@@ -284,8 +286,8 @@ function getSuggestionComponent() {
                       >
                         {suggestion.badge.text}
                       </span>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               ))}
             </span>
