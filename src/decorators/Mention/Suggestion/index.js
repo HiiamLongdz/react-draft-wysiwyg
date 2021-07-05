@@ -219,11 +219,12 @@ function getSuggestionComponent() {
         });
     };
 
-    addMention = () => {
+    addMention = (v) => {
       const { activeOption } = this.state;
+      const index = this.filteredSuggestions.findIndex((val) => val.id == v);
       const editorState = config.getEditorState();
       const { onChange, separator, trigger } = config;
-      const selectedMention = this.filteredSuggestions[activeOption];
+      const selectedMention = this.filteredSuggestions[index];
       if (selectedMention) {
         addMention(editorState, onChange, separator, trigger, selectedMention);
       }
@@ -257,10 +258,10 @@ function getSuggestionComponent() {
                 <div
                   key={suggestion.id}
                   spellCheck={false}
-                  onClick={this.addMention}
+                  onClick={() => this.addMention(suggestion.id)}
                   data-index={suggestion.id}
-                  onMouseEnter={this.onOptionMouseEnter}
-                  onMouseLeave={this.onOptionMouseLeave}
+                  // onMouseEnter={this.onOptionMouseEnter}
+                  // onMouseLeave={this.onOptionMouseLeave}
                   className={classNames(
                     "rdw-suggestion-option",
                     optionClassName,
