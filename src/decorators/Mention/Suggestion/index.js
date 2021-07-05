@@ -264,14 +264,17 @@ function getSuggestionComponent() {
                   className={classNames(
                     "rdw-suggestion-option",
                     optionClassName,
-                    { "rdw-suggestion-option-active": index === activeOption }
+                    {
+                      "rdw-suggestion-option-active":
+                        suggestion.id === activeOption,
+                    }
                   )}
                   style={{ minWidth: 100 }}
                 >
-                  <div style={{ marginTop: 10 }}>
-                    <span>{suggestion.text}</span>
+                  <span>{suggestion.text}</span>
 
-                    {suggestion.badge && (
+                  {suggestion.badge && (
+                    <div style={{ marginTop: 10 }}>
                       <span
                         style={{
                           backgroundColor: suggestion.badge.color,
@@ -286,8 +289,8 @@ function getSuggestionComponent() {
                       >
                         {suggestion.badge.text}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </span>
