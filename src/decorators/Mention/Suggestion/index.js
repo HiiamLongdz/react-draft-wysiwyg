@@ -263,6 +263,7 @@ function getSuggestionComponent() {
                   // onMouseEnter={this.onOptionMouseEnter}
                   // onMouseLeave={this.onOptionMouseLeave}
                   className={classNames(
+                    "custom-option",
                     "rdw-suggestion-option",
                     optionClassName,
                     {
@@ -270,12 +271,12 @@ function getSuggestionComponent() {
                         suggestion.id === activeOption,
                     }
                   )}
-                  style={{ minWidth: 100 }}
+                  style={{ minWidth: 200 }}
                 >
                   <span>{suggestion.text}</span>
 
                   {suggestion.badge && (
-                    <div style={{ marginTop: 10 }}>
+                    <div>
                       <span
                         style={{
                           backgroundColor: suggestion.badge.color,
